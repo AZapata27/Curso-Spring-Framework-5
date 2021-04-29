@@ -1,12 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
-<title th:text="${titulo}"></title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title th:text="${titulo}"></title>
+  </head>
+  <body>
+    <h1 th:text="${titulo}"></h1>
 
-<h1 th:text="${titulo}"></h1>
+    <!-- inicio de tabla de personas -->
+    <div th:if="${personas != null and !personas.empty}"> <!--  Si tiene items se muestra -->
+      <table>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Telefono</th>
+        </tr>
 
-</body>
+        <tr th:each="persona : ${personas}">
+          <td th:text="${persona.Nombre}"></td>
+
+          <td th:text="${persona.apellido}"></td>
+
+          <td th:text="${persona.email}"></td>
+
+          <td th:text="${persona.telefono}"></td>
+        </tr>
+      </table>
+    </div>
+    <div th:if="${personas = null and personas.empty}"> <!--  Si NO tiene items se muestra -->
+
+        La lista de personas esta vacia
+
+    </div>
+  </body>
 </html>
