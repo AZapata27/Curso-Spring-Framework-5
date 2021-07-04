@@ -17,57 +17,55 @@ import com.example.demo.service.PersonaService;
 @Controller
 public class IndexController {
 
-	@Autowired
-	private PersonaService personaService; 
-
-	
-	
-	@GetMapping({"/index","/","","/home"})
-	public String index(Model model,@AuthenticationPrincipal User user){
-
-		Iterable<Persona>  personas = personaService.listarPersonas();
-		 
-		model.addAttribute("personas",personas);
-
-		return "index";
-	}
-
-	@GetMapping({"/agregar"})
-	public String agregar(Persona persona){
+    @Autowired
+    private PersonaService personaService;
 
 
+    @GetMapping({"/index", "/", "", "/home"})
+    public String index(Model model, @AuthenticationPrincipal User user) {
 
-		return "Modificar";
-	}
+        Iterable<Persona> personas = personaService.listarPersonas();
 
-	@PostMapping({"/guardar"})
-	public String guardar(@Valid Persona persona,Errors errores){
+        model.addAttribute("personas", personas);
 
-		if(errores.hasErrors()){
-			return "modificar";
-		}
-		personaService.guardar(persona);
-		return "redirect:/";
-	}
+        return "index";
+    }
 
-	@GetMapping("/editar/{idPersona}")
-	public String editar(Persona persona,Model model){
+    @GetMapping({"/agregar"})
+    public String agregar(Persona persona) {
 
-		persona = personaService.encontarPersona(persona);
 
-		model.addAttribute("persona", persona);
+        return "Modificar";
+    }
 
-		return "modificar";
+    @PostMapping({"/guardar"})
+    public String guardar(@Valid Persona persona, Errors errores) {
 
-	}
+        if (errores.hasErrors()) {
+            return "modificar";
+        }
+        personaService.guardar(persona);
+        return "redirect:/";
+    }
 
-	@GetMapping("/eliminar/{idPersona}")
-	public String eliminar(Persona persona){
+    @GetMapping("/editar/{idPersona}")
+    public String editar(Persona persona, Model model) {
 
-		personaService.eliminar(persona);
+        persona = personaService.encontarPersona(persona);
 
-		return "redirect:/";
+        model.addAttribute("persona", persona);
 
-	}
-	
+        return "modificar";
+
+    }
+
+    @GetMapping("/eliminar/{idPersona}")
+    public String eliminar(Persona persona) {
+
+        personaService.eliminar(persona);
+
+        return "redirect:/";
+
+    }
+
 }

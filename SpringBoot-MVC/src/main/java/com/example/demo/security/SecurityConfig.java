@@ -19,24 +19,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder build) throws Exception{
+    public void configureGlobal(AuthenticationManagerBuilder build) throws Exception {
         build.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
-    
+
     //Autorizacion
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            .antMatchers("/editar/**","/agregar/**","/eliminar/**")
+                .antMatchers("/editar/**", "/agregar/**", "/eliminar/**")
                 .hasRole("ADMIN")
-            .antMatchers("/")
-                .hasAnyRole("USER","ADMIN")
-            .and()
+                .antMatchers("/")
+                .hasAnyRole("USER", "ADMIN")
+                .and()
                 .formLogin().loginPage("/login");
     }
 }

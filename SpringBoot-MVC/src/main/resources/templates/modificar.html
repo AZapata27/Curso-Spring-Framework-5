@@ -12,35 +12,35 @@
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
-    <h1>Datos de la Personas</h1>
-    
-    <a th:href="@{/}">Regresar</a>
+<h1>Datos de la Personas</h1>
 
+<a th:href="@{/}">Regresar</a>
+
+<br>
+<form th:action="@{/guardar}" method="POST" th:object="${persona}">
+
+    <input type="hidden" name="idPeronsa" th:field="*{idPersona}">
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre" th:field="*{nombre}">
+    <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error del Nombre</span>
     <br>
-    <form th:action="@{/guardar}" method="POST" th:object="${persona}">
+    <label for="apellido">Apellido:</label>
+    <input type="text" name="apellido" th:field="*{apellido}">
 
-        <input type="hidden" name="idPeronsa" th:field="*{idPersona}">
-    
-        <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre" th:field="*{nombre}">
-        <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error del Nombre</span>
-        <br>
-        <label for="apellido">Apellido:</label>
-        <input type="text" name="apellido" th:field="*{apellido}">
-        
-        <span th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">Error del Apellido</span>
-        <br>
-        <label for="email">Email:</label>
-        <input type="text" name="email" th:field="*{email}">
-        
-        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error del Email</span>
-        <br>
-        <label for="telefono">Telefono:</label>
-        <input type="tel" name="telefono" th:field="*{telefono}">
-        <br>
-        <input type="submit" name="guardar" value="Guardar">
-    
-    </form>
+    <span th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">Error del Apellido</span>
+    <br>
+    <label for="email">Email:</label>
+    <input type="text" name="email" th:field="*{email}">
+
+    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error del Email</span>
+    <br>
+    <label for="telefono">Telefono:</label>
+    <input type="tel" name="telefono" th:field="*{telefono}">
+    <br>
+    <input type="submit" name="guardar" value="Guardar">
+
+</form>
 
 </body>
 </html>

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("userDetailsService")
-public class UsuarioService implements UserDetailsService{
+public class UsuarioService implements UserDetailsService {
 
     @Autowired
     private UsuarioDao usuarioDao;
@@ -27,9 +27,9 @@ public class UsuarioService implements UserDetailsService{
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-       Usuario usuario = usuarioDao.findByUsername(username);
-    
-        if(usuario==null){
+        Usuario usuario = usuarioDao.findByUsername(username);
+
+        if (usuario == null) {
             throw new UsernameNotFoundException(username);
         }
 
@@ -40,7 +40,7 @@ public class UsuarioService implements UserDetailsService{
             roles.add(new SimpleGrantedAuthority(rol.getNombre()));
         }
 
-       return new User(usuario.getUsername(),usuario.getPassword(),roles);
+        return new User(usuario.getUsername(), usuario.getPassword(), roles);
     }
-    
+
 }
