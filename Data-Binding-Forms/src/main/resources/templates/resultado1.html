@@ -10,9 +10,9 @@
 <h1 th:text="${titulo}"></h1>
 
 <ul>
-    <li th:text="${username}"></li>
-    <li th:text="${password}"></li>
-    <li th:text="${email}"></li>
+    <li th:text="${usuario.getUsername()}"></li>
+    <li th:text="${usuario.getPassword()}"></li>
+    <li th:text="${usuario.getEmail()}"></li>
 </ul>
 
 </body>
